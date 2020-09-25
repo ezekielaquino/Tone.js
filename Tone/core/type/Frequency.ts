@@ -3,7 +3,7 @@ import { intervalToFrequencyRatio, mtof } from "./Conversions";
 import { ftom, getA4, setA4 } from "./Conversions";
 import { TimeClass } from "./Time";
 import { TimeBaseUnit, TimeExpression, TimeValue } from "./TimeBase";
-import { Frequency, Hertz, Interval, MidiNote, Note, Seconds, Ticks } from "./Units";
+import { Frequency as FrequencyFromUnits, Hertz, Interval, MidiNote, Note, Seconds, Ticks } from "./Units";
 
 export type FrequencyUnit = TimeBaseUnit | "midi";
 
@@ -244,6 +244,6 @@ const scaleIndexToNote = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", 
  * const hertz = Tone.Frequency(38, "midi").toFrequency();
  * console.log(hertz);
  */
-export function Frequency(value?: TimeValue | Frequency, units?: FrequencyUnit): FrequencyClass {
+export function Frequency(value?: TimeValue | FrequencyFromUnits, units?: FrequencyUnit): FrequencyClass {
 	return new FrequencyClass(getContext(), value, units);
 }
