@@ -1,7 +1,7 @@
 import { getContext } from "../Global";
 import { TimeBaseUnit, TimeValue } from "./TimeBase";
 import { TransportTimeClass } from "./TransportTime";
-import { Seconds, Ticks } from "./Units";
+import { Seconds, Ticks as TicksType } from "./Units";
 
 /**
  * Ticks is a primitive type for encoding Time values.
@@ -11,7 +11,7 @@ import { Seconds, Ticks } from "./Units";
  * const t = Tone.Ticks("4n"); // a quarter note as ticks
  * @category Unit
  */
-export class TicksClass extends TransportTimeClass<Ticks> {
+export class TicksClass extends TransportTimeClass<TicksType> {
 
 	readonly name: string = "Ticks";
 
@@ -20,36 +20,36 @@ export class TicksClass extends TransportTimeClass<Ticks> {
 	/**
 	 * Get the current time in the given units
 	 */
-	protected _now(): Ticks {
+	protected _now(): TicksType {
 		return this.context.transport.ticks;
 	}
 
 	/**
 	 * Return the value of the beats in the current units
 	 */
-	protected _beatsToUnits(beats: number): Ticks {
+	protected _beatsToUnits(beats: number): TicksType {
 		return this._getPPQ() * beats;
 	}
 
 	/**
 	 * Returns the value of a second in the current units
 	 */
-	protected _secondsToUnits(seconds: Seconds): Ticks {
+	protected _secondsToUnits(seconds: Seconds): TicksType {
 		return Math.floor(seconds / (60 / this._getBpm()) * this._getPPQ());
 	}
 
 	/**
 	 * Returns the value of a tick in the current time units
 	 */
-	protected _ticksToUnits(ticks: Ticks): Ticks {
+	protected _ticksToUnits(ticks: TicksType): TicksType {
 		return ticks;
 	}
 
 	/**
 	 * Return the time in ticks
 	 */
-	toTicks(): Ticks {
-		return this.valueOf() as Ticks;
+	toTicks(): TicksType {
+		return this.valueOf() as TicksType;
 	}
 
 	/**
